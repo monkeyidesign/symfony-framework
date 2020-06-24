@@ -1,4 +1,21 @@
-php bin/console debug:router
+composer require doctrine|
+composer require symfony/orm-pack
+composer require symfony/maker-bundle --dev
 
-http://127.0.0.1:8000/blogs/post/2
-http://127.0.0.1:8000/blogs/post/another-post
+***Database cml in php bin/console:
+php bin/console make:entity
+***>? //note: type ? for seeing all possible type
+php bin/console make:migrations
+
+***Insert data migrations into the database
+php bin/console doctrine:migrations:migrate
+php bin/console doctrine:migrations:diff
+php bin/console doctrine:migrations:migrate prev
+php bin/console doctrine:migrations:migrate next
+
+***reset database
+php bin/console doctrine:schema:drop -n -q --force --full-database
+rm src/Migrations/*.php
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate -n -q
+php bin/console doctrine:fixtures:load -n -q
