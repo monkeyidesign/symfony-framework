@@ -45,28 +45,43 @@ class BlogController extends AbstractController
         return $posts;
     }
 
+//    /**
+//     * @Route("/post/{id}", name="blog_by_id", requirements={"id"="\d+"})
+//     * @param $id
+//     * @return JsonResponse
+//     */
+//    public function post($id){
+//        return $this->json(
+//            $this->getDoctrine()->getRepository(BlogPost::class)->find($id)
+//        );
+//    }
     /**
      * @Route("/post/{id}", name="blog_by_id", requirements={"id"="\d+"})
-     * @param $id
+     * @param BlogPost $post
      * @return JsonResponse
      */
-    public function post($id){
-        return $this->json(
-            $this->getDoctrine()->getRepository(BlogPost::class)->find($id)
-        );
+    public function post(BlogPost $post){
+        return $this->json($post);
     }
 
+//    /**
+//     * @Route("/post/{slug}", name="blog_by_slug")
+//     * @param $slug
+//     * @return JsonResponse
+//     */
+//    public function postBySlug($slug){
+//        return $this->json(
+//            $this->getDoctrine()->getRepository(BlogPost::class)->findOneBy(['slug' => $slug])
+//        );
+//    }
     /**
      * @Route("/post/{slug}", name="blog_by_slug")
-     * @param $slug
+     * @param BlogPost $post
      * @return JsonResponse
      */
-    public function postBySlug($slug){
-        return $this->json(
-            $this->getDoctrine()->getRepository(BlogPost::class)->findOneBy(['slug' => $slug])
-        );
+    public function postBySlug(BlogPost $post){
+        return $this->json($post);
     }
-
     /**
      * @Route("/add", name="blog_add", methods={"POST"})
      * @param Request $request
