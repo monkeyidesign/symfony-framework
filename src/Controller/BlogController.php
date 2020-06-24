@@ -16,6 +16,58 @@ use Symfony\Component\Serializer\Serializer;
 class BlogController extends AbstractController
 {
     /**
+     * @Route("/{page}", name="blog_list", defaults={"page" : 3}, requirements={"page"="\d+"})
+     * @param $page
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function list($page, Request $request)
+    {
+        $limit = $request->get('limit', 10);
+        $repository = $this->getDoctrine()->getRepository(BlogPost::class);
+        $item = $repository->findAll();
+        //var_dump($item);
+
+        $posts = $this->json(
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'data' => array_map(function (BlogPost $item){
+                    return $this->generateUrl('blog_by_slug',['slug' => $item->getSlug()]);
+                }, $item)
+            ]
+        );
+//        return $this->render('blog/index.html.twig', [
+//            'controller_name' => 'BlogController',
+//            'posts' => $posts
+//        ]);
+
+        return $posts;
+    }
+
+    /**
+     * @Route("/post/{id}", name="blog_by_id", requirements={"id"="\d+"})
+     * @param $id
+     * @return JsonResponse
+     */
+    public function post($id){
+        return $this->json(
+            $this->getDoctrine()->getRepository(BlogPost::class)->find($id)
+        );
+    }
+
+    /**
+     * @Route("/post/{slug}", name="blog_by_slug")
+     * @param $slug
+     * @return JsonResponse
+     */
+    public function postBySlug($slug){
+        return $this->json(
+            $this->getDoctrine()->getRepository(BlogPost::class)->findOneBy(['slug' => $slug])
+        );
+    }
+
+    /**
      * @Route("/add", name="blog_add", methods={"POST"})
      * @param Request $request
      * @return JsonResponse
