@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\BlogPost;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,23 +55,15 @@ class BlogController extends AbstractController
 //            $this->getDoctrine()->getRepository(BlogPost::class)->find($id)
 //        );
 //    }
-//    /**
-//     * @Route("/post/{id}", name="blog_by_id", requirements={"id"="\d+"})
-//     * @param BlogPost $post
-//     * @return JsonResponse
-//     */
-//    public function post(BlogPost $post){
-//        return $this->json($post);
-//    }
     /**
      * @Route("/post/{id}", name="blog_by_id", requirements={"id"="\d+"})
-     * @ParamConverter("post", class="App:BlogPost")
-     * @param $post
+     * @param BlogPost $post
      * @return JsonResponse
      */
-    public function post($post){
+    public function post(BlogPost $post){
         return $this->json($post);
     }
+
 
 //    /**
 //     * @Route("/post/{slug}", name="blog_by_slug")
@@ -84,23 +75,15 @@ class BlogController extends AbstractController
 //            $this->getDoctrine()->getRepository(BlogPost::class)->findOneBy(['slug' => $slug])
 //        );
 //    }
-//    /**
-//     * @Route("/post/{slug}", name="blog_by_slug")
-//     * @param BlogPost $post
-//     * @return JsonResponse
-//     */
-//    public function postBySlug(BlogPost $post){
-//        return $this->json($post);
-//    }
     /**
      * @Route("/post/{slug}", name="blog_by_slug")
-     * @ParamConverter("post", class="App:BlogPost", options={"mapping": {"slug": "slug"}})
-     * @param $post
+     * @param BlogPost $post
      * @return JsonResponse
      */
-    public function postBySlug($post){
+    public function postBySlug(BlogPost $post){
         return $this->json($post);
     }
+
 
     /**
      * @Route("/add", name="blog_add", methods={"POST"})
