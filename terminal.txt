@@ -6,3 +6,6 @@ composer require symfony/maker-bundle --dev
 composer require twig
 composer require doctrine
 symfony server:start
+
+restart server
+php -S 127.0.0.1:8000 -t public/
