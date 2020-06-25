@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Serializer;
 
+
 /**
  * @Route("/blogs")
  */
@@ -56,7 +57,7 @@ class BlogController extends AbstractController
 //        );
 //    }
     /**
-     * @Route("/post/{id}", name="blog_by_id", requirements={"id"="\d+"})
+     * @Route("/post/{id}", name="blog_by_id", requirements={"id"="\d+"}, methods={"Get"})
      * @param BlogPost $post
      * @return JsonResponse
      */
@@ -76,7 +77,7 @@ class BlogController extends AbstractController
 //        );
 //    }
     /**
-     * @Route("/post/{slug}", name="blog_by_slug")
+     * @Route("/post/{slug}", name="blog_by_slug", methods={"Get"})
      * @param BlogPost $post
      * @return JsonResponse
      */
