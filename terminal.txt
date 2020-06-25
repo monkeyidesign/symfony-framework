@@ -1,11 +1,2 @@
-********initial symfony
-
-symfony new my_project_name
-composer require annotations
-composer require symfony/maker-bundle --dev
-composer require twig
-composer require doctrine
-symfony server:start
-
-restart server
-php -S 127.0.0.1:8000 -t public/
+composer require --dev doctrine/doctrine-fixtures-bundle
+php bin/console doctrine:fixtures:load
