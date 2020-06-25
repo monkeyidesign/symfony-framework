@@ -103,4 +103,19 @@ class BlogController extends AbstractController
 
         return $this->json($blogPost);
     }
+
+    /**
+     * @Route("/post/{id}", name="blog_delete", methods={"DELETE"})
+     * @param BlogPost $post
+     * @return JsonResponse
+     */
+
+    public function delete(BlogPost $post){
+        //DELETE http://127.0.0.1:8000/blogs/post/5
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($post);
+        $em->flush();
+
+        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+    }
 }
